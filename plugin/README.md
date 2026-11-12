@@ -3,7 +3,7 @@
 Records what you asked, which files the agent changed, and when each turn ended, into
 `.agentlogix/events.jsonl` in your project. Hooks only append one line to that file. They make
 no network calls and never block the agent. Nothing happens in a folder without `.agentlogix/`.
-Type `/agentlogix` in Claude Code in your project to set it up: it runs `scripts/setup.js`, which sets up
+Type `/agentlogix:agentlogix` (or the short `/agentlogix`) in Claude Code in your project to set it up: it runs `scripts/setup.js`, which sets up
 the current folder, starts or reuses the dashboard and opens it.
 
 Load it while developing:

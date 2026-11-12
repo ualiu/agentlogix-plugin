@@ -14,7 +14,7 @@ In Claude Code:
 ```
 
 Then open Claude Code in your project and type `/agentlogix`. The first time, it downloads the
-AgentLogix app from npm (`agentlogix@0.3.1`), opens your dashboard and asks you to
+AgentLogix app from npm (`agentlogix@0.3.2`), opens your dashboard and asks you to
 sign in. Node.js 20.12 or newer is needed.
 
 ## What it installs
@@ -23,4 +23,4 @@ Three small hooks that note what you ask and which files your AI edits (they onl
 `.agentlogix` folder in your project), a skill that teaches your AI to draw the map and report
 on its changes, and the `/agentlogix` command. Your code isn't uploaded.
 
-Version 0.3.1.
+Version 0.3.2.
