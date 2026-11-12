@@ -1,0 +1,9 @@
+{
+  "name": "agentlogix",
+  "displayName": "AgentLogix",
+  "version": "0.2.0",
+  "description": "A living map of your app: what your AI agent changed, what it affected, and what it missed.",
+  "author": { "name": "AgentLogix" },
+  "license": "MIT",
+  "keywords": ["map", "changes", "review"]
+}

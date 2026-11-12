@@ -1,0 +1,16 @@
+{
+  "name": "agentlogix",
+  "description": "AgentLogix for Claude Code: a live map of your app, every AI change checked.",
+  "owner": {
+    "name": "AgentLogix",
+    "url": "https://agentlogix.si"
+  },
+  "plugins": [
+    {
+      "name": "agentlogix",
+      "source": "./plugin",
+      "version": "0.2.0",
+      "description": "A living map of your app: what your AI agent changed, what it affected, and what it missed."
+    }
+  ]
+}
