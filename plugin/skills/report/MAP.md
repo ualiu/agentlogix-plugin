@@ -10,8 +10,9 @@ No em dashes.
 
 ## What goes in it
 
-**nodes**: the change map. 6 to 10 boxes (never more than 14), each a part of the app a customer
-or the owner would recognise. Follow the main path a customer takes (form → quote → checkout →
+**nodes**: the change map. 6 to 10 boxes for a small or medium app; for a big one (roughly 150+
+source files or 15,000+ lines) use 10 to 14, so it doesn't look thinner than it is. Never more than
+14. Each box is a part of the app a customer or the owner would recognise. Follow the main path a customer takes (form → quote → checkout →
 payment → database → emails), then add the other important parts. Each has:
 - `id`: short, lowercase, dashes (`booking-form`)
 - `title`: 1 to 3 words
@@ -22,6 +23,11 @@ payment → database → emails), then add the other important parts. Each has:
   (things that run on a timer or in the background)
 - `files`: globs relative to the repo root, forward slashes (`client/src/components/booking/**`).
   Every source file should belong to one box where possible. Prefer folders and globs over long lists.
+- `parts`: what the box is made of, so the owner can see inside it: 2 to 6 smaller pieces, each
+  `{ "title": 1 to 3 words, "plain": one sentence, "files": globs }` ("Markdown editor": "Where
+  articles are written, with a live preview."). Name them the way the owner would, not by file
+  name. Every file of the box should fall in one piece where possible. Skip `parts` for a box with
+  only one or two files.
 
 **edges**: how the boxes connect.
 - `flow`: A hands the work to B, in the order a customer action travels (`form` → `quote`).
@@ -79,7 +85,11 @@ database records).
   "nodes": [
     { "id": "form", "title": "Booking form", "plain": "Where the customer enters addresses, the pickup time and the parcel.", "kind": "screen", "files": ["client/src/pages/Book.jsx", "client/src/components/booking/**"] },
     { "id": "quote", "title": "Quote", "plain": "Answers the form: can we do this trip, and what does it cost?", "kind": "server", "files": ["server/routes/quote.js"] },
-    { "id": "rules", "title": "Rules and prices", "plain": "Pickup hours, cutoffs and every price, in one place.", "kind": "logic", "files": ["server/config/**"] }
+    { "id": "rules", "title": "Rules and prices", "plain": "Pickup hours, cutoffs and every price, in one place.", "kind": "logic", "files": ["server/config/**"],
+      "parts": [
+        { "title": "Pickup hours", "plain": "When pickups can happen, and the cutoffs for each zone.", "files": ["server/config/schedule.js"] },
+        { "title": "Prices", "plain": "Every price and surcharge, by zone and speed.", "files": ["server/config/rates.js"] }
+      ] }
   ],
   "edges": [
     { "from": "form", "to": "quote", "kind": "flow" },
