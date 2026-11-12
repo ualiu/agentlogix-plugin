@@ -195,7 +195,8 @@ async function main() {
     home = res.json;
   }
   const active = home.active;
-  const url = `http://localhost:${port}/dashboard`;
+  // The project's own address, so this tab stays on it even when another project is opened later.
+  const url = `http://localhost:${port}/p/${encodeURIComponent(active.id)}/dashboard`;
   const opened = await openBrowser(url);
   const dataDir = path.join(root, '.agentlogix');
 
@@ -211,7 +212,7 @@ async function main() {
     out.push(mapGuide());
     out.push('--- END OF MAP GUIDE ---');
   } else {
-    const open = (await request(port, 'GET', '/api/issues?status=open')).json?.open || [];
+    const open = (await request(port, 'GET', `/api/p/${encodeURIComponent(active.id)}/issues?status=open`)).json?.open || [];
     out.push('NEXT_STEP: show-needs-a-look');
     if (!open.length) out.push('Nothing needs a look.');
     else {

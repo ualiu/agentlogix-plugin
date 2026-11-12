@@ -39,8 +39,15 @@ The report lives in `.agentlogix/`, AgentLogix's own folder, not in the project'
 6. Things you couldn't test yourself ("Not checked in a browser", "Payment flow not run") go in
    `untested`, one short sentence each. **Never put testing reminders in `risks`. Use `untested`.**
    `risks` is only for real problems you found or suspect.
-7. If you fixed an open issue (the reminder lists them as `#id`), add its id to `resolves`.
-8. If you added a whole new part of the app, update the map first (see MAP.md), then report.
+7. **Security.** Look at what you changed the way an attacker would. If this turn added or changed
+   something that could let someone take money, data or accounts (a route that doesn't check who is
+   signed in, one user reading another's records by changing an id, a price taken from the browser,
+   a secret sent to the browser, a webhook that doesn't check its signature), add it to `security`
+   with the box, a plain `title`, what someone could do in `text`, `severity` (`high` if money, data
+   or accounts are at stake, else `medium`) and a `fix` prompt. Only real concerns about code you
+   wrote or read; leave it empty otherwise. Never copy a secret value into the report.
+8. If you fixed an open issue (the reminder lists them as `#id`), add its id to `resolves`.
+9. If you added a whole new part of the app, update the map first (see MAP.md), then report.
 
 Write the file with your Write tool to `.agentlogix/inbox/report.json`:
 
@@ -64,6 +71,7 @@ Write the file with your Write tool to `.agentlogix/inbox/report.json`:
       "fix": "Update the booking form so it greys out Afternoon for long trips, using the same rule function as the server."
     }
   ],
+  "security": [],
   "resolves": [],
   "untested": ["Not checked in a browser: the pickup picker on a phone screen."]
 }

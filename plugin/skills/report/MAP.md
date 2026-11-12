@@ -45,6 +45,17 @@ saying in one sentence what happens at that box on this journey. Follow the real
 it, don't guess). A box can appear in more than one flow. AgentLogix shows which steps each AI
 change touched, so pick journeys that matter to the business.
 
+**security**: possible security problems you noticed while reading the code for the map, the
+kind a fixed rule can't see: a route that changes or shows data without checking who is signed in,
+one user able to see another user's records by changing an id, a price or amount taken from the
+browser, an admin page anyone can open, a payment marked paid without asking Stripe, uploads with
+no type or size check. Each is `{ "node": <box id>, "title": ..., "text": ..., "severity": "high" | "medium",
+"fix": ... }`: `title` in a few plain words, `text` saying what someone could do and why it matters,
+`fix` a prompt the user can paste back to you. `high` means someone could take money, data or
+accounts; otherwise `medium`. Only real findings from code you read; leave the list empty if you
+saw none. Never copy a secret value into the map. (AgentLogix scans for leaked keys, open database
+rules and injection on its own, so you don't need to list those.)
+
 **services**: outside things features depend on, by name: "Database", "Stripe", "Clerk",
 "Google Maps", "Resend". Keep to the ones that matter.
 
@@ -85,6 +96,15 @@ database records).
         { "node": "quote", "text": "The server checks the trip can be done and works out the price." },
         { "node": "rules", "text": "Pickup hours, cutoffs and prices are looked up here." }
       ]
+    }
+  ],
+  "security": [
+    {
+      "node": "quote",
+      "title": "The price comes from the browser",
+      "text": "Checkout charges the amount the booking form sends, so a customer could change it and pay less.",
+      "severity": "high",
+      "fix": "Make checkout work out the price on the server from the trip details, using the same rules as Quote, and ignore any amount sent by the browser."
     }
   ]
 }

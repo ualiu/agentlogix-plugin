@@ -12,7 +12,7 @@ run((input) => {
   if (config.report === false) return;
 
   const open = readJson(path.join(root, dataDir, 'issues.json'), [])
-    .filter((i) => !i.resolvedIn && !i.dismissed)
+    .filter((i) => !i.resolvedIn && !i.resolvedAt && !i.dismissed)
     .slice(0, 5)
     .map((i) => `#${i.id} "${i.title}"`);
 
