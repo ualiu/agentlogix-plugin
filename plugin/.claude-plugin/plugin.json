@@ -1,7 +1,7 @@
 {
   "name": "agentlogix",
   "displayName": "AgentLogix",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A living map of your app: what your AI agent changed, what it affected, and what it missed.",
   "author": { "name": "AgentLogix" },
   "license": "MIT",
