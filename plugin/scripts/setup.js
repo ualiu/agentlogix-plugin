@@ -196,7 +196,8 @@ async function main() {
   }
   const active = home.active;
   // The project's own address, so this tab stays on it even when another project is opened later.
-  const url = `http://localhost:${port}/p/${encodeURIComponent(active.id)}/dashboard`;
+  // No tab named: the dashboard opens Changes when there are sessions, How it works when there are none.
+  const url = `http://localhost:${port}/p/${encodeURIComponent(active.id)}/`;
   const opened = await openBrowser(url);
   const dataDir = path.join(root, '.agentlogix');
 
